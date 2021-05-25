@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, redirect, flash, jsonify
+from flask import Flask, request, render_template, jsonify
 from models import db, connect_db, Cupcake
 
 app = Flask(__name__)
@@ -17,24 +17,32 @@ def show_all_cupcake_data():
 
 @app.route('/api/cupcakes/<int:cupcake_id>')
 def show_one_cupcake(cupcake_id):
+    """ show details of a specific cupcake """
     cupcake = Cupcake.query.get_or_404(cupcake_id)
     serialized = cupcake.serialize_cupcake()
     return jsonify(cupcake=serialized)
 
 @app.route('/api/cupcakes', methods=['POST'])
 def post_a_cupcake():
-
-    flavor = request.json["flavor"]
-    size = request.json["size"]
-    rating = request.json["rating"]
+    """ POST route for the cupcakes """
+    flavor = request.json['flavor']
+    size = request.json['size']
+    rating = request.json['rating']
     try: 
-        image = request.json["image"]
+        image = request.json['image']
     except:
-        inage = 'https://www.bakedbyrachel.com/wp-content/uploads/2018/01/chocolatecupcakesccfrosting1_bakedbyrachel.jpg' 
-    new_cupcake = Cupcake(flavor=flavor, size=size, rating=rating)
-    serialized = new_cupcake.serialize_cupcake()
-    db.session.add(serialized)
+        image = 'https://www.bakedbyrachel.com/wp-content/uploads/2018/01/chocolatecupcakesccfrosting1_bakedbyrachel.jpg' 
+    new_cupcake = Cupcake(flavor=flavor, size=size, rating=rating, image=image)
+    db.session.add(new_cupcake)
     db.session.commit()
-    return (jsonify(cupcake=serialized), 201)
+    return (jsonify(cupcake=new_cupcake.serialize_cupcake()), 201)
+
+@app.route('/api/cupcakes/<int:cupcake_id>', methods=['DELETE'])
+def delete_a_cupcake(cupcake_id):
+    deleted_cupcake = Cupcake.query.get_or_404(cupcake_id)
+    db.session.delete(deleted_cupcake)
+    db.session.commit()
+    return jsonify(message='Deleted Cupcake')
+
 
 
