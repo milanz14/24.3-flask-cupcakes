@@ -21,3 +21,20 @@ def show_one_cupcake(cupcake_id):
     serialized = cupcake.serialize_cupcake()
     return jsonify(cupcake=serialized)
 
+@app.route('/api/cupcakes', methods=['POST'])
+def post_a_cupcake():
+
+    flavor = request.json["flavor"]
+    size = request.json["size"]
+    rating = request.json["rating"]
+    try: 
+        image = request.json["image"]
+    except:
+        inage = 'https://www.bakedbyrachel.com/wp-content/uploads/2018/01/chocolatecupcakesccfrosting1_bakedbyrachel.jpg' 
+    new_cupcake = Cupcake(flavor=flavor, size=size, rating=rating)
+    serialized = new_cupcake.serialize_cupcake()
+    db.session.add(serialized)
+    db.session.commit()
+    return (jsonify(cupcake=serialized), 201)
+
+
