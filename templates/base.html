@@ -7,10 +7,6 @@
     <title>Cupcakes</title>
 </head>
 <body>
-    {% for msg in get_flashed_messages() %}
-        {{ msg }}
-    {% endfor %}
-    {% block content %}
     
     <form>
         <div>
@@ -32,11 +28,9 @@
         <button id="add-btn">Add More Cupcakes</button>
     </form>
     <button id="get-btn">Get All Cupcakes</button>
-    <div class="cupcakes-container">
+    <div id="cupcakes-container">
 
     </div>
-
-    {% endblock %}
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="/static/app.js"></script>
