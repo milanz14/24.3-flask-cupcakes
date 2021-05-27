@@ -19,18 +19,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 const rating = cupcake.rating;
                 const cupcakeDiv = document.createElement('div');
 
-                const flavorEl = document.createElement('p');
-                flavorEl.textContent = flavor;
-                const imageEl = document.createElement('img');
-                imageEl.setAttribute('src', image);
-                const sizeEl = document.createElement('p');
-                sizeEl.textContent = size;
-                const ratingEl = document.createElement('span')
-                ratingEl.textContent = rating;
-                cupcakeDiv.append(flavorEl, imageEl, sizeEl, ratingEl);
-
-                mainContainer.appendChild(cupcakeDiv);
-                
             }
         })
     }
