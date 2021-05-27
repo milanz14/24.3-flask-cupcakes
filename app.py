@@ -8,6 +8,11 @@ app.config['SECRET_KEY'] = 'development_key'
 
 connect_db(app)
 
+@app.route('/')
+def show_homepage():
+    cupcakes = Cupcake.query.all()
+    return render_template('base.html', cupcakes=cupcakes)
+
 @app.route('/api/cupcakes')
 def show_all_cupcake_data():
     """ shows all of the cupcake information in the API """

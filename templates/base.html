@@ -11,7 +11,34 @@
         {{ msg }}
     {% endfor %}
     {% block content %}
+    
+    <form>
+        <div>
+            <label for="flavor">Flavor</label>
+            <input type="text" name="flavor" id="flavor">
+        </div>
+        <div>
+            <label for="size">Size</label>
+            <input type="text" name="size" id="size">
+        </div>
+        <div>
+            <label for="rating">Rating</label>
+            <input type="text" name="rating" id="rating">
+        </div>
+        <div>
+            <label for="image">Image</label>
+            <input type="text" name="image" id="image">
+        </div>
+        <button id="add-btn">Add More Cupcakes</button>
+    </form>
+    <button id="get-btn">Get All Cupcakes</button>
+    <div class="cupcakes-container">
 
-    {% end block %}
+    </div>
+
+    {% endblock %}
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="/static/app.js"></script>
 </body>
 </html>
