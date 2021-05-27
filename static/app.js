@@ -12,16 +12,27 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault()
 
         await axios.get(`${URL}/api/cupcakes`).then(response => {
+            console.log(response.data.cupcakes)
             for (let cupcake of response.data.cupcakes) {
                 const flavor = cupcake.flavor;
                 const image = cupcake.image;
                 const size = cupcake.size;
                 const rating = cupcake.rating;
-                const cupcakeDiv = document.createElement('div');
+                const ckContainer = document.createElement('div');
+                 
+                ckContainer.innerHTML = `
+                <div>
+                    <h3>${flavor} Cupcake</h3>
+                    <h5>Rating: ${rating}</h5>
+                    <h6>Size: ${size}</h6
+                    <img src='${image}' alt='cupcake' height="200" width="200">
+                </div>`;
 
-            }
-        })
-    }
+                mainContainer.append(ckContainer);
+                
+            };
+        });
+    };
 
     const postData = async (e) => {
         e.preventDefault();
