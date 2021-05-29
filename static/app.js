@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div>
                     <h3>${flavor} Cupcake</h3>
                     <h5>Rating: ${rating}</h5>
-                    <h6>Size: ${size}</h6
+                    <h6>Size: ${size}</h6>
                     <img src='${image}' alt='cupcake' height="200" width="200">
                 </div>`;
 
